@@ -7,7 +7,9 @@ function Home() {
   return (
     <>
       <NavBar />
-      <Hero />
+      {/* <Hero/> */}
+      {/* <Hero /> */}
+      <Hero first="tecnología" second="renovada -Hola mundo" />
       <main>
         <div className={styles["product-container"]} id="products">
           <a className={styles["product-card"]} href="./details.html">
