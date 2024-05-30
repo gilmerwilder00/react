@@ -1,23 +1,5 @@
-/* MAIN */
-main {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  /* MAIN PRODUCTS */
-  .product-container {
-    width: 1080px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  
-  /* CARD */
-  /* .product-card {
+/* CARD */
+.product-card {
     background-color: #f0f0f0;
     color: #383838;
     border-radius: 15px;
@@ -77,4 +59,4 @@ main {
   .product-tax-policy {
     font-size: 10px;
     font-weight: 300;
-  } */
+  }
