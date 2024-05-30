@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar";
 // --
 import products from "../assets/products.js";
 import { useParams } from "react-router-dom";
-import Hero from "../components/Hero.js";
+// import Hero from "../components/Hero.js";
 import ProductCard from "../components/ProductCard.js";
 import NotFound from "./NotFound.js";
 
@@ -28,8 +28,7 @@ function Details() {
       <>
         <NavBar />
         {/* Renderización condicional (uso de operador &&) */}
-  
-        {!product && <Hero first="Not" second="Found"  />  }
+        {/* {!product && <Hero first="Not" second="Found"  />  } */}
   
         <main>
           <div className={styles["details-container"]}>
@@ -77,9 +76,15 @@ function Details() {
                       id="color"
                       >
                       {/* <option value="Silver">Silver</option> */}
-                      <option value={product.colors[0]}>{product.colors[0]}</option>
+                      {/* <option value={product.colors[0]}>{product.colors[0]}</option>
                       <option value={product.colors[1]}>{product.colors[1]}</option>
-                      <option value={product.colors[2]}>{product.colors[2]}</option>
+                      <option value={product.colors[2]}>{product.colors[2]}</option> */}
+                       {
+                          product.colors.map( (each,index)=> (
+                            <option key={index} value={each}> {each}</option>
+                          ) )
+                       } 
+
                     </select>
                   </fieldset>
                 </form>
@@ -137,6 +142,7 @@ function Details() {
                       </span>
                     </li>
                   </ul>
+
                   <div className={styles["checkout-process"]}>
                     <div className={styles["top"]}>
                       <input type="number" min="1" defaultValue="1" />
@@ -145,9 +151,10 @@ function Details() {
                       </button>
                     </div>
                   </div>
+                  
                 </div>
               </div>
-              
+
 
             </div>
   
@@ -235,8 +242,6 @@ function Details() {
   
               </div>
             </div>
-  
-  
           </div>
         </main>
         <Footer />
