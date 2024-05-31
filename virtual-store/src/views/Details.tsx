@@ -4,38 +4,34 @@ import NavBar from "../components/NavBar";
 // --
 import products from "../assets/products.js";
 import { useParams } from "react-router-dom";
-// import Hero from "../components/Hero.js";
 import ProductCard from "../components/ProductCard.js";
 import NotFound from "./NotFound.js";
-
-
+// --
+import Thumbs from "../components/Thumbs.js";
+import Description from "../components/Descriptions.js";
+import Checkout from "../components/Checkout.js";
 
 function Details() {
-
   // Se obtiene el id pasado como parámetro en el URL
   const { id } = useParams();
-
-  // Se obtiene el producto con el id 
+  // Se obtiene el producto con el id
   const product = products.find((product) => product.id === id);
-
   // Se obtiene los productos que estan en oferta
-  const onsale  = products.filter((product)=> product.onsale)
+  const onsale = products.filter((product) => product.onsale);
 
-  // console.log(product);
-
-  if(product){
+  if (product) {
     return (
       <>
         <NavBar />
         {/* Renderización condicional (uso de operador &&) */}
         {/* {!product && <Hero first="Not" second="Found"  />  } */}
-  
+
         <main>
           <div className={styles["details-container"]}>
-  
             <div id="details" className={styles["columns-container"]}>
 
-              <section className={styles["product-images-block"]}>
+              {/* Thumbs section */}
+              {/* <section className={styles["product-images-block"]}>
                 <div className={styles["product-images"]}>
                   <img
                     className={styles["mini-img"]}
@@ -60,61 +56,39 @@ function Details() {
                     src={product.images[0]}
                     alt={product.title}
                 />
-              </section>
+              </section> */}
+              <Thumbs product={product} />
 
-
-              <div className={styles["product-description-block"]}>
-                {/* <h1 className={styles["product-title"]}>MacBook Pro 13'4</h1> */}
+              {/* Description Section */}
+              {/* <div className={styles["product-description-block"]}>
                 <h1 className={styles["product-title"]}>{product.title}</h1>
                 <form className={styles["product-selector"]}>
                   <fieldset className={styles["product-fieldset"]}>
                     <label className={styles["product-label"]} htmlFor="color">
                       Color
                     </label>
-                    <select
-                      className={styles["product-select"]}
-                      id="color"
-                      >
-                      {/* <option value="Silver">Silver</option> */}
-                      {/* <option value={product.colors[0]}>{product.colors[0]}</option>
-                      <option value={product.colors[1]}>{product.colors[1]}</option>
-                      <option value={product.colors[2]}>{product.colors[2]}</option> */}
-                       {
-                          product.colors.map( (each,index)=> (
-                            <option key={index} value={each}> {each}</option>
-                          ) )
-                       } 
-
+                    <select className={styles["product-select"]} id="color">
+                      {product.colors.map((each, index) => (
+                        <option key={index} value={each}>
+                          {each}
+                        </option>
+                      ))}
                     </select>
                   </fieldset>
                 </form>
                 <div className={styles["product-description"]}>
                   <span className={styles["product-label"]}>Descripción</span>
-                  {/* <p>
-                    Experience the power of creativity with the MacBook Pro 13'4.
-                    Featuring 8GB of RAM and 512GB of storage, this laptop
-                    provides the performance and storage capacity needed for
-                    demanding tasks. The sleek design in silver and space gray
-                    adds a touch of sophistication. The high-resolution Retina
-                    display brings your visuals to life, whether you're editing
-                    photos, creating videos, or simply browsing the web. With the
-                    latest technology and a lightweight build, the MacBook Pro
-                    13'4 is the perfect companion for professionals and creative
-                    individuals alike.
-                  </p> */}
-                  <p>
-                    {product.description}
-                  </p>
+
+                  <p>{product.description}</p>
                 </div>
-              </div>
+              </div> */}
+              <Description product = {product}/>
 
-
-              <div className={styles["product-checkout-block"]}>
+              {/* Checkout Section  */}
+              {/* <div className={styles["product-checkout-block"]}>
                 <div className={styles["checkout-container"]}>
                   <span className={styles["checkout-total-label"]}>Total:</span>
-                  {/* <h2 id="price" className={styles["checkout-total-price"]}>
-                    $750000
-                  </h2> */}
+
                   <h2 id="price" className={styles["checkout-total-price"]}>
                     ${product.price}
                   </h2>
@@ -151,21 +125,20 @@ function Details() {
                       </button>
                     </div>
                   </div>
-                  
                 </div>
-              </div>
-
+              </div> */}
+              <Checkout product = {product}/>
 
             </div>
-  
-  
+
             <div className={styles["sales-block"]}>
               <h2 className={styles["sales-title"]}>Ofertas de la semana</h2>
-              <div id="product-container" className={styles["product-container"]}>
-  
-  
-  {/* 
-                <a className={styles["product-card"]} href="./details.html">
+              <div
+                id="product-container"
+                className={styles["product-container"]}
+              >
+                
+                {/* <a className={styles["product-card"]} href="./details.html">
                   <img
                     className={styles["product-img"]}
                     src="https://i.postimg.cc/2ymFtsTn/kindle2.jpg"
@@ -225,21 +198,17 @@ function Details() {
                     </div>
                   </div>
                 </a> */}
-  
-                {
-                  onsale.map( (product)=>(
-                    <ProductCard
-                      key = {product.id}
-                      id = {product.id}
-                      title = {product.title}
-                      price = {product.price}
-                      color = {product.colors[0]}
-                      image = {product.images[0]}
-                    />
-                  ))
-                }
-  
-  
+
+                {onsale.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    id={product.id}
+                    title={product.title}
+                    price={product.price}
+                    color={product.colors[0]}
+                    image={product.images[0]}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -247,17 +216,13 @@ function Details() {
         <Footer />
       </>
     );
-
-
   }
 
   return (
     <>
-    <NotFound/>
+      <NotFound />
     </>
-  )
-
-
+  );
 }
 
 export default Details;
