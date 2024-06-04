@@ -1,35 +1,36 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./Checkout.module.css";
 
 function Checkout(props) {
   const { product } = props;
-                             
   const [quantity, setQuantity] = useState(1);
+  const [button, setButton] = useState(false);
+  const units = useRef(null);
 
-  let productsOnCart = JSON.parse(localStorage.getItem("cart") ?? '[]');
-  const one = productsOnCart.find((each) => each.id === product.id);
-  const productIncart = one ? true : false;
-  const [button, setButton] = useState(productIncart);
-
-  console.log(button);
-  
-  const manageCart = () => {
-    // Obtener productos de carrito
-    let productsOnCart = JSON.parse(localStorage.getItem("cart") ?? '[]');
-    // Buscar producto actual en el carrito
-    const one = productsOnCart.find((each) => each.id === product.id);
-    // Si el producto no se encuentra en el carrito
-    if (!one) {
-      //se agrega el producto al arreglo de productos 
-      productsOnCart.push(product);
-      //Se actualiza el estado del botón a true   
+  useEffect(() => {
+    let productsOnCart = JSON.parse(localStorage.getItem("cart") ?? "[]");
+    const one = productsOnCart.find((item) => item.id === product.id);
+    if (one) {
+      setQuantity(one.units);
       setButton(true);
-    } else {// si el producto ya esta en el carrito
-      // se obtiene todos los productos menos el que tiene el ID del producto actual (simula retiro de carrito) 
+    } else {
+      setQuantity(1);
+      setButton(false);
+    }
+  }, [product.id]);
+
+  const manageCart = () => {
+    let productsOnCart = JSON.parse(localStorage.getItem("cart") ?? "[]");
+    const one = productsOnCart.find((each) => each.id === product.id);
+
+    if (!one) {
+      product.units = Number(units.current.value);
+      productsOnCart.push(product);
+      setButton(true);
+    } else {
       productsOnCart = productsOnCart.filter((each) => each.id !== product.id);
       setButton(false);
     }
-    // se actualiza los productos los de carrito
     localStorage.setItem("cart", JSON.stringify(productsOnCart));
   };
 
@@ -39,7 +40,6 @@ function Checkout(props) {
         <span className={styles["checkout-total-label"]}>Total:</span>
 
         <h2 id="price" className={styles["checkout-total-price"]}>
-          {/* ${product.price} */}
           ${(product.price * quantity).toLocaleString()}
         </h2>
 
@@ -47,6 +47,7 @@ function Checkout(props) {
           Incluye impuesto PAIS y percepción AFIP. Podés recuperar AR$ 50711
           haciendo la solicitud en AFIP.
         </p>
+
         <ul className={styles["checkout-policy-list"]}>
           <li>
             <span className={styles["policy-icon"]}>
@@ -69,32 +70,20 @@ function Checkout(props) {
 
         <div className={styles["checkout-process"]}>
           <div className={styles["top"]}>
-            {/* <input type="number" min="1" value="1" /> */}
-
-
             <input
-              id="input-quantity" // se agrega id
+              id="input-quantity"
               type="number"
               min="1"
-              // defaultValue="1"
-              defaultValue={quantity}
-              onChange = { (event) => setQuantity(Number(event.target.value))  }
+              value={quantity}
+              ref={units}
+              onChange={() => setQuantity(Number(units.current.value))}
             />
-
-
             <button
               type="button"
-            //   className={styles["cart-btn"]}
-              className={ button ? styles["remove-btn"] : styles["cart-btn"]}
-            //   onClick={() => setButton(!button)} // se actualiza el estado con el valor contrario a button
-               onClick={manageCart} // se actualiza el estado con el valor contrario a button
+              className={button ? styles["remove-btn"] : styles["cart-btn"]}
+              onClick={manageCart}
             >
-
-              {/* Añadir al Carrito */}
-
               {button ? "Remover del carrito" : "Añadir al carrito"}
-
-
             </button>
           </div>
         </div>
