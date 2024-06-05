@@ -1,0 +1,87 @@
+/* CARD */
+.product-card {
+  background-color: white;
+  color: #383838;
+  border-radius: 15px;
+  width: 250px;
+  margin: 15px;
+  text-decoration: none;
+  border: 2px solid #c1c1c1; /*se agrega borde */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /*se agrega sombra */
+}
+
+.product-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  object-position: center center;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom: 2px solid #c1c1c1 ;  
+}
+
+.product-info {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.product-title {
+  font-size: 20px; /*se modifica tamaño*/
+  font-weight: 500; /*se modifica peso*/
+  line-height: 25px;
+  word-wrap: break-word;
+  display: block;
+}
+
+.product-description {
+  font-size: 20px;
+  font-weight: 400;
+  color: #383838;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/*se agrega clase*/
+.product-onsale-block {
+  display: flex;
+  gap: 10px;
+}
+
+/* se agrega clase */
+.product-onsale-description {
+  font-size: 15px; 
+  font-weight: 500;
+  color: #383838;
+}
+
+/* se agrega clase */
+.product-initial-price {
+  font-size: 15px; 
+  font-weight: 500;
+  color: #383838;
+  text-decoration: line-through;
+}
+
+.product-price-block {
+  display: flex;
+  margin: 5px 0;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-price-block .product-price {
+  font-size: 21px; /*se modifica tamaño*/
+  font-weight: 600;
+}
+
+.product-price-block .product-discount {
+  font-size: 15px; /*se modifica tamaño*/
+  font-weight: 700;
+  color: #428f13;
+}
+
+.product-tax-policy {
+  font-size: 15px; /*se modifica tamaño*/
+  font-weight: 300;
+  color: #428f13; /*se agrega color */
+}
