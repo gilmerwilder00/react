@@ -6,33 +6,32 @@ import products from "../assets/products.js";
 import { useState } from "react";
 
 function OnSale() {
-  // find onSale products
   const onSaleProducts = products.filter((product) => product.onsale);
-  const numPerSlice = 3
+  const numProductsPerSlice = 3;
   const [from, setFrom] = useState(0);
-  const [to, setTo] = useState(numPerSlice);
+  const [to, setTo] = useState(numProductsPerSlice);
 
   const slicedProducts = onSaleProducts.slice(from, to);
 
-  const nextSug = () =>{
-    if(to < onSaleProducts.length){
-      setFrom(from + numPerSlice)
-      setTo(to + numPerSlice)
+  const nextSug = () => {
+    if (to < onSaleProducts.length) {
+      setFrom(from + numProductsPerSlice);
+      setTo(to + numProductsPerSlice);
     }
-  }
+  };
 
-  const prevSug = () =>{
+  const prevSug = () => {
     if (from > 0) {
-      setFrom(from - numPerSlice)
-      setTo(to - numPerSlice)
+      setFrom(from - numProductsPerSlice);
+      setTo(to - numProductsPerSlice);
     }
-  }
-
+  };
 
   return (
     <>
       <NavBar />
       <main>
+        <button onClick={prevSug}>Anterior</button>
         <div className={styles["product-container"]} id="products">
           {slicedProducts.map((product) => (
             <OnSaleCard
@@ -46,12 +45,8 @@ function OnSale() {
             />
           ))}
         </div>
-
-        <button onClick={prevSug}  >Anterior</button>
-        <button onClick={nextSug}  >Siguiente</button>
+        <button onClick={nextSug}>Siguiente</button>
       </main>
-
-
       <Footer />
     </>
   );

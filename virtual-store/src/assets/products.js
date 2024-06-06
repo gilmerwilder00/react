@@ -95,8 +95,8 @@ const prod6 = new Product(
     "https://i.postimg.cc/WbcbB2MB/gopro12.png",
   ],
   ["Black"],
-  false,
-  0
+  true,
+  23
 );
 const prod7 = new Product(
   "Y7Z8A9",
